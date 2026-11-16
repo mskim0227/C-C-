@@ -1,0 +1,38 @@
+문제 2 중첩 구조체와 포인터 멤버 접근 (빈칸 채우기)
+다음 코드는 직원(Employee)의 이름과 주소(Address) 정보를 저장하고 출력하는 프로그램이다. 밑줄 친 ( ㉠ )과 ( ㉡ )에 들어갈 알맞은 코드를 작성하시오.
+
+#include <stdio.h>
+#include <string.h>
+
+struct Address {
+    char city[50];
+    int zipCode;
+};
+
+struct Employee {
+    char name[50];
+    struct Address *address;
+};
+
+int main() {
+    struct Employee emp;
+    struct Address addr;
+
+    emp.address = (   ㉠   );
+    strcpy(emp.name, "홍길동");
+    strcpy((   ㉡   ), "인천광역시");
+    emp.address->zipCode = 22212;
+
+    printf("이름: %s, 도시: %s, 우편번호: %d\n", emp.name, emp.address->city, emp.address->zipCode);
+    return 0;
+}
+
+
+
+
+
+문제 2 정답: ㉠ &addr   /   ㉡ emp.address->city
+- 해설: Employee 구조체의 멤버 address는 Address 구조체를 가리키는 포인터 변수이므로, 구조체 인스턴스 addr의 주소(&addr)를 할당해야 합니다. 포인터 멤버를 통해 내부 멤버에 접근할 때는 화살표 연산자(->)를 사용하여 emp.address->city와 같이 접근합니다. 
+
+
+

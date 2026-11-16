@@ -1,0 +1,29 @@
+문제 4 공용체(union)의 메모리 공유 특성 (코드 실행 결과 예측)
+다음 공용체(union)를 사용한 프로그램의 실행 결과를 쓰시오. (단, 시스템은 리틀 엔디안(Little-Endian) 방식을 사용하며, 아스키코드 'A'는 65, 'B'는 66이다. 참고: 16706 = 0x4142)
+
+#include <stdio.h>
+
+union UNDATA {
+    short num;      // 2바이트
+    char chAry[2];  // 1바이트 * 2
+};
+
+int main() {
+    union UNDATA ud;
+    ud.num = 16706;
+
+    printf("Short: %hd\n", ud.num);
+    printf("Ch[0]: %c\n", ud.chAry[0]);
+    printf("Ch[1]: %c\n", ud.chAry[1]);
+
+    return 0;
+}
+
+
+
+
+문제 4 정답:
+Short: 16706
+Ch[0]: B
+Ch[1]: A
+- 해설: 공용체는 모든 멤버가 동일한 메모리 시작 주소를 공유합니다. 2바이트 정수 16706(16진수 0x4142)이 리틀 엔디안 방식으로 저장되면 낮은 주소(chAry[0])에 0x42(66, 'B')가, 높은 주소(chAry[1])에 0x41(65, 'A')이 저장됩니다. 

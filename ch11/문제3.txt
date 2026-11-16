@@ -1,0 +1,42 @@
+문제 3 구조체와 함수의 인수 전달 방식 (코드 실행 결과 예측)
+다음 C 프로그램을 실행했을 때, 콘솔 창에 출력되는 결과를 정확히 쓰시오.
+
+#include <stdio.h>
+#include <string.h>
+
+struct Person {
+    char name[20];
+    int age;
+};
+
+void func1(struct Person p) {
+    strcpy(p.name, "Kim");
+    p.age = 30;
+}
+
+void func2(struct Person *p) {
+    strcpy(p->name, "Lee");
+    p->age = 25;
+}
+
+int main() {
+    struct Person student = {"Moon", 20};
+
+    func1(student);
+    printf("1: %s, %d\n", student.name, student.age);
+
+    func2(&student);
+    printf("2: %s, %d\n", student.name, student.age);
+
+    return 0;
+}
+
+
+
+
+
+
+문제 3 정답:
+1: Moon, 20
+2: Lee, 25
+- 해설: func1()은 구조체를 '값에 의한 호출(Call by Value)'로 전달받으므로 복사본의 값이 수정되어 원본 student에는 영향을 주지 않습니다. 반면 func2()는 구조체 포인터를 통해 주소를 전달받으므로 원본 student의 멤버 값이 직접 수정됩니다. 
