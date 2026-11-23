@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+struct Point {
+    double x;
+    double y;
+};
+
+int main(void) {
+    struct Point p1, p2;
+
+    if (scanf("%lf %lf", &p1.x, &p1.y) != 2) {
+        return 1;
+    }
+    if (scanf("%lf %lf", &p2.x, &p2.y) != 2) {
+        return 1;
+    }
+
+    double mid_x = (p1.x + p2.x) / 2.0;
+    double mid_y = (p1.y + p2.y) / 2.0;
+
+    printf("Center point = (%.1f, %.1f)\n", mid_x, mid_y);
+
+    return 0;
+}
